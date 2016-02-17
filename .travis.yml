@@ -1,0 +1,24 @@
+sudo: false
+language: java
+jdk:
+- oraclejdk8
+script: mvn test jacoco:report coveralls:report -q
+deploy:
+  - provider: script
+    script: mvn deploy -q -settings=settings.xml -DskipTests=true
+    skip_cleanup: true
+    on:
+        branch: master
+notifications:
+    webhooks: http://lametric-dev.kermit.orange-labs.fr/travis
+cache:
+  directories:
+    - $HOME/.m2
+addons:
+    coverity_scan:
+      project:
+        name: "Orange-OpenSource/fiware-ngsi-api"
+      notification_email: pascale.borscia@orange.com
+      build_command_prepend: "mvn clean"
+      build_command:   "mvn -DskipTests=true compile"
+      branch_pattern: coverity_scan
