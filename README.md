@@ -1,7 +1,7 @@
 # FIWARE NGSI v1 API
 
 [![Build Status](https://travis-ci.org/Orange-OpenSource/fiware-ngsi-api.svg?branch=master)](https://travis-ci.org/Orange-OpenSource/fiware-ngsi-api)
-[![Coverity Scan Status](https://scan.coverity.com/projects/7943/badge.svg)](https://scan.coverity.com/projects/7943)
+[![Coverity Scan Status](https://scan.coverity.com/projects/7972/badge.svg)](https://scan.coverity.com/projects/7972)
 [![Coverage Status](https://coveralls.io/repos/github/Orange-OpenSource/fiware-ngsi-api/badge.svg?branch=master)](https://coveralls.io/github/Orange-OpenSource/fiware-ngsi-api?branch=master)
 [![Apache Version 2 Licence](https://img.shields.io/badge/License-Apache%20Version%202-blue.svg)](LICENSE.txt)
 
