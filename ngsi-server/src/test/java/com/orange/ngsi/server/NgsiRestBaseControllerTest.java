@@ -19,6 +19,7 @@ package com.orange.ngsi.server;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.orange.ngsi.TestConfiguration;
+import com.orange.ngsi.Util;
 import com.orange.ngsi.model.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,7 +68,7 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkAppendContextElementNotImplemented() throws Exception {
         mockMvc.perform(
-                post("/rest/ni/contextEntities/test").content(json(jsonConverter, createAppendContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                post("/rest/ni/contextEntities/test").content(Util.json(jsonConverter, Util.createAppendContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
     }
@@ -75,7 +76,7 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkUpdateContextElementNotImplemented() throws Exception {
         mockMvc.perform(
-                put("/rest/ni/contextEntities/test").content(json(jsonConverter, createUpdateContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                put("/rest/ni/contextEntities/test").content(Util.json(jsonConverter, Util.createUpdateContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
     }
@@ -99,7 +100,8 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkAppendContextAttributeNotImplemented() throws Exception {
         mockMvc.perform(
-                post("/rest/ni/contextEntities/test/attributes/temp").content(json(jsonConverter, createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                post("/rest/ni/contextEntities/test/attributes/temp").content(
+                        Util.json(jsonConverter, Util.createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
     }
@@ -107,7 +109,8 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkUpdateContextAttributeNotImplemented() throws Exception {
         mockMvc.perform(
-                put("/rest/ni/contextEntities/test/attributes/temp").content(json(jsonConverter, createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                put("/rest/ni/contextEntities/test/attributes/temp").content(
+                        Util.json(jsonConverter, Util.createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
     }
@@ -131,7 +134,8 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkUpdateContextAttributeValueNotImplemented() throws Exception {
         mockMvc.perform(
-                put("/rest/ni/contextEntities/test/attributes/temp/DEADBEEF").content(json(jsonConverter, createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                put("/rest/ni/contextEntities/test/attributes/temp/DEADBEEF").content(
+                        Util.json(jsonConverter, Util.createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
     }
@@ -172,7 +176,7 @@ public class NgsiRestBaseControllerTest {
     public void checkAddSubscriptionNotImplemented() throws Exception {
         mockMvc.perform(
                 post("/rest/ni/contextSubscriptions")
-                        .content(json(jsonConverter, createSubscribeContextTemperature())).contentType(MediaType.APPLICATION_JSON)
+                        .content(Util.json(jsonConverter, Util.createSubscribeContextTemperature())).contentType(MediaType.APPLICATION_JSON)
                         .header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
@@ -182,7 +186,7 @@ public class NgsiRestBaseControllerTest {
     public void checkUpdateSubscriptionNotImplemented() throws Exception {
         mockMvc.perform(
                 put("/rest/ni/contextSubscriptions/12345678")
-                        .content(json(jsonConverter, createUpdateContextSubscriptionTemperature())).contentType(MediaType.APPLICATION_JSON)
+                        .content(Util.json(jsonConverter, Util.createUpdateContextSubscriptionTemperature())).contentType(MediaType.APPLICATION_JSON)
                         .header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_403.getLabel()));
@@ -221,7 +225,7 @@ public class NgsiRestBaseControllerTest {
     public void checkUpdateSubscriptionMistmatchId() throws Exception {
         mockMvc.perform(
                 put("/rest/ni/contextSubscriptions/87654321")
-                        .content(json(jsonConverter, createUpdateContextSubscriptionTemperature())).contentType(MediaType.APPLICATION_JSON)
+                        .content(Util.json(jsonConverter, Util.createUpdateContextSubscriptionTemperature())).contentType(MediaType.APPLICATION_JSON)
                         .header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_472.getLabel()));
@@ -230,7 +234,7 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkAppendContextElementImplemented() throws Exception {
         mockMvc.perform(
-                post("/rest/i/contextEntities/test").content(json(jsonConverter, createAppendContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                post("/rest/i/contextEntities/test").content(Util.json(jsonConverter, Util.createAppendContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.contextResponses").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.contextResponses[0].statusCode.code").value(CodeEnum.CODE_200.getLabel()))
@@ -244,7 +248,7 @@ public class NgsiRestBaseControllerTest {
 
     @Test
     public void checkUpdateContextElementImplemented() throws Exception {
-        mockMvc.perform(put("/rest/i/contextEntities/test").content(json(jsonConverter, createUpdateContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(put("/rest/i/contextEntities/test").content(Util.json(jsonConverter, Util.createUpdateContextElementTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.contextResponses").isArray())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.contextResponses[0].statusCode.code").value(CodeEnum.CODE_200.getLabel()))
@@ -281,7 +285,8 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkAppendContextAttributeImplemented() throws Exception {
         mockMvc.perform(
-                post("/rest/i/contextEntities/test/attributes/temp").content(json(jsonConverter, createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                post("/rest/i/contextEntities/test/attributes/temp").content(
+                        Util.json(jsonConverter, Util.createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_200.getLabel()));
     }
@@ -289,7 +294,8 @@ public class NgsiRestBaseControllerTest {
     @Test
     public void checkUpdateContextAttributeImplemented() throws Exception {
         mockMvc.perform(
-                put("/rest/i/contextEntities/test/attributes/temp").content(json(jsonConverter, createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
+                put("/rest/i/contextEntities/test/attributes/temp").content(
+                        Util.json(jsonConverter, Util.createUpdateContextAttributeTemperature())).contentType(MediaType.APPLICATION_JSON).header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_200.getLabel()));
     }
@@ -318,10 +324,10 @@ public class NgsiRestBaseControllerTest {
 
     @Test
     public void checkUpdateContextAttributeValueImplemented() throws Exception {
-        UpdateContextAttribute updateContextAttribute = createUpdateContextAttributeTemperature();
+        UpdateContextAttribute updateContextAttribute = Util.createUpdateContextAttributeTemperature();
         updateContextAttribute.getAttribute().setMetadata(Collections.singletonList(new ContextMetadata("ID", "string", "DEADBEEF")));
         mockMvc.perform(
-                put("/rest/i/contextEntities/test/attributes/temp/DEADBEEF").content(json(jsonConverter, updateContextAttribute))
+                put("/rest/i/contextEntities/test/attributes/temp/DEADBEEF").content(Util.json(jsonConverter, updateContextAttribute))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(CodeEnum.CODE_200.getLabel()));
@@ -396,7 +402,7 @@ public class NgsiRestBaseControllerTest {
     public void checkAddSubscriptionImplemented() throws Exception {
         mockMvc.perform(
                 post("/rest/i/contextSubscriptions")
-                        .content(json(jsonConverter, createSubscribeContextTemperature())).contentType(MediaType.APPLICATION_JSON)
+                        .content(Util.json(jsonConverter, Util.createSubscribeContextTemperature())).contentType(MediaType.APPLICATION_JSON)
                         .header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.subscribeResponse.subscriptionId").value("12345678"))
@@ -407,7 +413,7 @@ public class NgsiRestBaseControllerTest {
     public void checkUpdateSubscriptionImplemented() throws Exception {
         mockMvc.perform(
                 put("/rest/i/contextSubscriptions/12345678")
-                        .content(json(jsonConverter, createUpdateContextSubscriptionTemperature())).contentType(MediaType.APPLICATION_JSON)
+                        .content(Util.json(jsonConverter, Util.createUpdateContextSubscriptionTemperature())).contentType(MediaType.APPLICATION_JSON)
                         .header("Host", "localhost").accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.subscribeResponse.subscriptionId").value("12345678"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.subscribeResponse.duration").value("P1M"));    }

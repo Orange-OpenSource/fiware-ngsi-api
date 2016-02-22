@@ -18,7 +18,6 @@ package com.orange.ngsi.server;
 
 import com.orange.ngsi.exception.MismatchIdException;
 import com.orange.ngsi.exception.MissingRequestParameterException;
-import com.orange.ngsi.exception.UnsupportedOperationException;
 import com.orange.ngsi.model.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,7 +28,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static com.orange.ngsi.model.CodeEnum.CODE_200;
 

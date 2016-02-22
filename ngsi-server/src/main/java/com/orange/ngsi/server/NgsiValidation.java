@@ -18,7 +18,6 @@ package com.orange.ngsi.server;
 
 import com.orange.ngsi.exception.MismatchIdException;
 import com.orange.ngsi.exception.MissingRequestParameterException;
-import com.orange.ngsi.exception.UnsupportedOperationException;
 import com.orange.ngsi.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by pborscia on 07/08/2015.
