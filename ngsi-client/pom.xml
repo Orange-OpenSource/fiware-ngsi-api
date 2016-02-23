@@ -13,6 +13,7 @@
     <artifactId>ngsi-client</artifactId>
     <version>${ngsi-api.version}</version>
     <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
