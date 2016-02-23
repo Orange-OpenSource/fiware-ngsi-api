@@ -20,8 +20,13 @@ at [Orange-OpenSource/fiware-ngsi2-api](https://github.com/Orange-OpenSource/fiw
 
 ```xml
 <dependency>
-    <groupId>com.orange.cepheus</groupId>
-    <artifactId>cepheus-ngsi</artifactId>
+    <groupId>com.orange.fiware</groupId>
+    <artifactId>ngsi-client</artifactId>
+    <version>X.Y.Z</version>
+</dependency>
+<dependency>
+    <groupId>com.orange.fiware</groupId>
+    <artifactId>ngsi-server</artifactId>
     <version>X.Y.Z</version>
 </dependency>
 ```
@@ -30,8 +35,14 @@ For java 7, you must add the classifier:
 
 ```xml
 <dependency>
-   <groupId>com.orange.cepheus</groupId>
-   <artifactId>cepheus-ngsi</artifactId>
+   <groupId>com.orange.fiware</groupId>
+   <artifactId>ngsi-client</artifactId>
+   <classifier>java7</classifier>
+    <version>X.Y.Z</version>
+</dependency>
+<dependency>
+   <groupId>com.orange.fiware</groupId>
+   <artifactId>ngsi-server</artifactId>
    <classifier>java7</classifier>
     <version>X.Y.Z</version>
 </dependency>
@@ -43,7 +54,9 @@ where `X.Y.Z` is the version of the library to use (check git tags).
 
 If you don't have `maven` installed on your machine, you can still download the standalone JAR using `wget` or any browser:
 
-    wget -O cepheus-ngsi.jar "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=com.orange.cepheus&a=cepheus-ngsi&v=LATEST"
+    wget -O ngsi-client.jar "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=com.orange.fiware&a=ngsi-client&v=LATEST"
+    wget -O ngsi-server.jar "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=com.orange.fiware&a=ngsi-server&v=LATEST"
+
 
 ## Client
 
