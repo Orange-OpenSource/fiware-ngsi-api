@@ -10,7 +10,7 @@
             <version>dev</version>
     </parent>
 
-    <artifactId>ngsi-api-client</artifactId>
+    <artifactId>ngsi-client</artifactId>
     <version>${ngsi-api.version}</version>
     <packaging>jar</packaging>
 
