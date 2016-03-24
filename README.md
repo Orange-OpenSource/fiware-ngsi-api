@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/Orange-OpenSource/fiware-ngsi-api.svg?branch=master)](https://travis-ci.org/Orange-OpenSource/fiware-ngsi-api)
 [![Coverity Scan Status](https://scan.coverity.com/projects/7972/badge.svg)](https://scan.coverity.com/projects/7972)
 [![Coverage Status](https://coveralls.io/repos/github/Orange-OpenSource/fiware-ngsi-api/badge.svg?branch=master)](https://coveralls.io/github/Orange-OpenSource/fiware-ngsi-api?branch=master)
+[![Client Doc](https://img.shields.io/badge/client%20doc-latest-brightgreen.svg)](http://www.javadoc.io/doc/com.orange.fiware/ngsi-client)
+[![Server Doc](https://img.shields.io/badge/server%20doc-latest-brightgreen.svg)](http://www.javadoc.io/doc/com.orange.fiware/ngsi-server)
 [![Apache Version 2 Licence](https://img.shields.io/badge/License-Apache%20Version%202-blue.svg)](LICENSE.txt)
 
 This project is the library of the [NGSI v1 API](http://forge.fiware.org/plugins/mediawiki/wiki/fiware/index.php/FI-WARE_NGSI:_publicly_available_documents)
