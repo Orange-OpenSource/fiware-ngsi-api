@@ -200,7 +200,7 @@ public class NgsiBaseController {
     }
 
     /**
-     * Register the host to protocolRegistry if it supports JSON
+     * Register the host to protocolRegistry if it supports XML
      * @param httpServletRequest the request
      */
     private void registerIntoDispatcher(HttpServletRequest httpServletRequest) {
@@ -212,8 +212,8 @@ public class NgsiBaseController {
             accept = httpServletRequest.getHeader("Content-Type");
         }
 
-        if (accept != null && accept.contains(MediaType.APPLICATION_JSON_VALUE)) {
-            protocolRegistry.registerHost(uri, true);
+        if (accept != null && accept.contains(MediaType.APPLICATION_ATOM_XML_VALUE)) {
+            protocolRegistry.registerHost(uri);
         }
     }
 }

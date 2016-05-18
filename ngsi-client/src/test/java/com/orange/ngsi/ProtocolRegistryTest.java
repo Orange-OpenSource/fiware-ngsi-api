@@ -30,31 +30,22 @@ public class ProtocolRegistryTest {
     ProtocolRegistry protocolRegistry = new ProtocolRegistry();
 
     @Test
-    public void supportV1JsonTest() throws URISyntaxException {
-        protocolRegistry.registerHost("http://localhost:8080", true);
+    public void supportJsonTest() throws URISyntaxException {
+        protocolRegistry.unregisterHost("http://localhost:8080");
         assertEquals(true, protocolRegistry.supportV1Json("http://localhost:8080"));
-        assertEquals(false, protocolRegistry.supportV2Json("http://localhost:8080"));
         assertEquals(false, protocolRegistry.supportXml("http://localhost:8080"));
     }
 
     @Test
-    public void supportV2JsonTest() throws URISyntaxException {
-        protocolRegistry.registerHost("http://localhost:8081", false);
-        assertEquals(false, protocolRegistry.supportV1Json("http://localhost:8081"));
-        assertEquals(true, protocolRegistry.supportV2Json("http://localhost:8081"));
-        assertEquals(false, protocolRegistry.supportXml("http://localhost:8081"));
-    }
-
-    @Test
     public void supportXmlTest() throws URISyntaxException {
+        protocolRegistry.registerHost("http://localhost:8082");
         assertEquals(false, protocolRegistry.supportV1Json("http://localhost:8082"));
-        assertEquals(false, protocolRegistry.supportV2Json("http://localhost:8082"));
         assertEquals(true, protocolRegistry.supportXml("http://localhost:8082"));
     }
 
     @Test
     public void registerHostWithURIExceptionTest() {
-        protocolRegistry.registerHost("http://localhost :8082", true);
+        protocolRegistry.registerHost("http://localhost :8082");
     }
 
     @Test
@@ -63,12 +54,7 @@ public class ProtocolRegistryTest {
     }
 
     @Test
-    public void supportV2JsonWithURIExceptionTest() throws URISyntaxException {
-        assertEquals(false, protocolRegistry.supportV2Json("http://localhost :8082"));
-    }
-
-    @Test
     public void supportXmlWithURIExceptionTest() throws URISyntaxException {
-        assertEquals(true, protocolRegistry.supportXml("http://localhost :8082"));
+        assertEquals(false, protocolRegistry.supportXml("http://localhost :8082"));
     }
 }

@@ -107,7 +107,7 @@ public class NotifyContextRequestTest {
     @Test
     public void notifyContextRequestOK() throws Exception {
 
-        ngsiClient.protocolRegistry.registerHost(baseUrl, true);
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
 
         String responseBody = json(jsonConverter, createNotifyContextResponseTempSensor());
 
@@ -133,7 +133,7 @@ public class NotifyContextRequestTest {
     @Test
     public void notifyContextRequestOK_XML() throws Exception {
 
-        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
 
         String responseBody = xml(xmlConverter, createNotifyContextResponseTempSensor());
 

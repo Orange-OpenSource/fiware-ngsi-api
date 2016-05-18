@@ -107,7 +107,7 @@ public class RegisterContextRequestTest {
     @Test
     public void registerContextRequestOK() throws Exception {
 
-        ngsiClient.protocolRegistry.registerHost(baseUrl, true);
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
         String responseBody = json(jsonConverter, createRegisterContextResponseTemperature());
 
         this.mockServer.expect(requestTo(baseUrl + "/ngsi9/registerContext"))
@@ -135,7 +135,7 @@ public class RegisterContextRequestTest {
     @Test
     public void registerContextRequestOK_XML() throws Exception {
 
-        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
 
         String responseBody = xml(xmlConverter, createRegisterContextResponseTemperature());
 

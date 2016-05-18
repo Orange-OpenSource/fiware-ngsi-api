@@ -107,7 +107,7 @@ public class QueryContextRequestTest {
     @Test
     public void queryContextRequestOK() throws Exception {
 
-        ngsiClient.protocolRegistry.registerHost(baseUrl, true);
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
 
         String responseBody = json(jsonConverter, createQueryContextResponseTemperature());
 
@@ -141,7 +141,7 @@ public class QueryContextRequestTest {
     @Test
     public void queryContextRequestOK_XML() throws Exception {
 
-        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
 
         String responseBody = xml(xmlConverter, createQueryContextResponseTemperature());
 

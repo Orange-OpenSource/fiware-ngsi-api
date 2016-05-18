@@ -107,7 +107,7 @@ public class UpdateContextSubscriptionTest {
     @Test
     public void updateContextSubscriptionRequestOK() throws Exception {
 
-        ngsiClient.protocolRegistry.registerHost(baseUrl, true);
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
         String responseBody = json(jsonConverter, createUpdateContextSubscriptionResponseTemperature());
 
         this.mockServer.expect(requestTo(baseUrl + "/ngsi10/updateContextSubscription"))
@@ -133,7 +133,7 @@ public class UpdateContextSubscriptionTest {
     @Test
     public void updateContextSubscriptionRequestOK_XML() throws Exception {
 
-        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
         String responseBody = xml(xmlConverter, createUpdateContextSubscriptionResponseTemperature());
 
         this.mockServer.expect(requestTo(baseUrl + "/ngsi10/updateContextSubscription"))

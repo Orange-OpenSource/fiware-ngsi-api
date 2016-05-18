@@ -22,8 +22,8 @@ import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Identify if host accept json or xml content
@@ -34,19 +34,18 @@ public class ProtocolRegistry {
     private static Logger logger = LoggerFactory.getLogger(ProtocolRegistry.class);
 
     /**
-     * Keeps track of hosts supporting json (true => v1, false => v2).
-     * Hosts only supporting xml are not added (returning null).
+     * Keeps track of hosts supporting XML
+     * Hosts only supporting json are not added (returning null).
      */
-    private Map<String, Boolean> jsonHost = new HashMap<>();
+    private Set<String> xmlHost = new HashSet<>();
 
     /**
-     * memorize the host supports the JSON v1 or v2 APIs
+     * memorize the host supports XML only
      * @param url url of the host
-     * @param v1 true if host accept api v1, false if host accept api v2
      */
-    public void registerHost(String url, boolean v1) {
+    public void registerHost(String url) {
         try {
-            jsonHost.put(getHost(url), v1);
+            xmlHost.add(getHost(url));
         } catch (URISyntaxException e) {
             logger.warn("failed to register url {}", url);
         }
@@ -58,7 +57,7 @@ public class ProtocolRegistry {
      */
     public void unregisterHost(String url) {
         try {
-            jsonHost.remove(getHost(url));
+            xmlHost.remove(getHost(url));
         } catch (URISyntaxException e) {
             logger.warn("failed to register url {}", url);
         }
@@ -71,22 +70,7 @@ public class ProtocolRegistry {
      */
     public boolean supportV1Json(String url) {
         try {
-            Boolean result = jsonHost.get(getHost(url));
-            return result != null && result;
-        } catch (URISyntaxException e) {
-            return false;
-        }
-    }
-
-    /**
-     * indicate if the host support V2 Json
-     * @param url of the host
-     * @return true if host support api v2
-     */
-    public boolean supportV2Json(String url) throws URISyntaxException {
-        try {
-            Boolean result = jsonHost.get(getHost(url));
-            return result != null && !result;
+            return !xmlHost.contains(getHost(url));
         } catch (URISyntaxException e) {
             return false;
         }
@@ -99,9 +83,9 @@ public class ProtocolRegistry {
      */
     public boolean supportXml(String url) {
         try {
-            return jsonHost.get(getHost(url)) == null;
+            return xmlHost.contains(getHost(url));
         } catch (URISyntaxException e) {
-            return true;
+            return false;
         }
     }
 

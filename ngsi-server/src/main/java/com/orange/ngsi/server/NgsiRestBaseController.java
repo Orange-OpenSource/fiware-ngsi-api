@@ -356,8 +356,8 @@ public class NgsiRestBaseController {
             accept = httpServletRequest.getHeader("Content-Type");
         }
 
-        if (accept != null && accept.contains(MediaType.APPLICATION_JSON_VALUE)) {
-            protocolRegistry.registerHost(uri, true);
+        if (accept != null && accept.contains(MediaType.APPLICATION_XML_VALUE)) {
+            protocolRegistry.registerHost(uri);
         }
     }
 }

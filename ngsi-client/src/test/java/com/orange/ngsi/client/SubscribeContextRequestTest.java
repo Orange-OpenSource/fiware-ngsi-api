@@ -107,8 +107,9 @@ public class SubscribeContextRequestTest {
 
     @Test
     public void subscribeContextRequestOK() throws Exception {
+        // Ensure host is not registering (will use JSON)
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
 
-        ngsiClient.protocolRegistry.registerHost(baseUrl, true);
         String responseBody = json(jsonConverter, createSubscribeContextResponseTemperature());
 
         this.mockServer.expect(requestTo(baseUrl + "/ngsi10/subscribeContext"))
@@ -139,8 +140,9 @@ public class SubscribeContextRequestTest {
 
     @Test
     public void subscribeContextRequestOK_XML() throws Exception {
+        // Ensure host is registered (will use XML)
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
 
-        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
         String responseBody = xml(xmlConverter, createSubscribeContextResponseTemperature());
 
         this.mockServer.expect(requestTo(baseUrl + "/ngsi10/subscribeContext"))

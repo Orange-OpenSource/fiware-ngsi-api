@@ -110,7 +110,7 @@ public class UnsubscribeContextRequestTest {
     @Test
     public void unsubscribeContextRequestOK() throws Exception {
 
-        ngsiClient.protocolRegistry.registerHost(baseUrl, true);
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
         String responseBody = json(jsonConverter, createUnsubscribeContextResponse(CodeEnum.CODE_200, subscriptionID));
 
         this.mockServer.expect(requestTo(baseUrl + "/ngsi10/unsubscribeContext"))
@@ -131,7 +131,7 @@ public class UnsubscribeContextRequestTest {
     @Test
     public void unsubscribeContextRequestOK_XML() throws Exception {
 
-        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
 
         String responseBody = xml(xmlConverter, createUnsubscribeContextResponse(CodeEnum.CODE_200, subscriptionID));
 

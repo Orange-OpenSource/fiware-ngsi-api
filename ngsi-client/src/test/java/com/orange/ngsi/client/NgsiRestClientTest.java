@@ -78,7 +78,6 @@ public class NgsiRestClientTest {
     public void tearUp() {
         MockitoAnnotations.initMocks(this);
         this.mockServer = MockRestServiceServer.createServer(asyncRestTemplate);
-        ngsiRestClient.protocolRegistry.registerHost(baseUrl, true); // support JSON
     }
 
     @After
