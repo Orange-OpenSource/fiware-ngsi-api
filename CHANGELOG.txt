@@ -1,0 +1,7 @@
+# 0.1.1
+
+* Switch to using JSON by default, use XML only if a host uses XML first.
+
+# 0.1.0
+
+Initial version
