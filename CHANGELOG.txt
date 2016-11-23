@@ -1,3 +1,8 @@
+# 0.1.2
+
+* Add a new notifyContextCustomURL request to send notifyContext request to custom URLs.
+* FIX: Fix updateContextResponse parse in JSON
+
 # 0.1.1
 
 * Switch to using JSON by default, use XML only if a host uses XML first.
