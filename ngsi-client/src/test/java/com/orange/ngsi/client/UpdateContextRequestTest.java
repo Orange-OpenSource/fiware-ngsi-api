@@ -161,6 +161,10 @@ public class UpdateContextRequestTest {
                 .andExpect(header("Fiware-Service", serviceName))
                 .andExpect(header("Fiware-ServicePath", servicePath))
                 .andExpect(jsonPath("$.updateAction").value(UpdateAction.UPDATE.getLabel()))
+                .andExpect(jsonPath("$.contextElements[0].id").value("S1"))
+                .andExpect(jsonPath("$.contextElements[0].attributes[0].name").value("temp"))
+                .andExpect(jsonPath("$.contextElements[0].attributes[0].type").value("float"))
+                .andExpect(jsonPath("$.contextElements[0].attributes[0].value").value("15.5"))
                 .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
 
         ngsiClient.updateContext(brokerUrl, httpHeaders, createUpdateContextTempSensor(0)).get();
