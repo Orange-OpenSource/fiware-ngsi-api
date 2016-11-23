@@ -158,4 +158,77 @@ public class NotifyContextRequestTest {
 
         Assert.assertEquals(CodeEnum.CODE_200.getLabel(), response.getResponseCode().getCode());
     }
+
+    @Test(expected = HttpServerErrorException.class)
+    public void notifyContextRequestCustomURLWith500() throws Exception {
+
+        mockServer.expect(requestTo(baseUrl+"/test?p1=v1")).andExpect(method(HttpMethod.POST))
+                .andRespond(withStatus(HttpStatus.INTERNAL_SERVER_ERROR));
+
+        ngsiClient.notifyContextCustomURL(baseUrl+"/test?p1=v1", null, createNotifyContextTempSensor(0)).get();
+    }
+
+    @Test(expected = HttpClientErrorException.class)
+    public void notifyContextRequestCustomURLWith404() throws Exception {
+
+        mockServer.expect(requestTo(baseUrl+"/test?p1=v1")).andExpect(method(HttpMethod.POST))
+                .andRespond(withStatus(HttpStatus.NOT_FOUND));
+
+        ngsiClient.notifyContextCustomURL(baseUrl+"/test?p1=v1", null, createNotifyContextTempSensor(0)).get();
+    }
+
+    @Test
+    public void notifyContextRequestCustomURLOK() throws Exception {
+
+        ngsiClient.protocolRegistry.unregisterHost(baseUrl);
+
+        String responseBody = json(jsonConverter, createNotifyContextResponseTempSensor());
+
+        this.mockServer.expect(requestTo(baseUrl+"/test?p1=v1")).andExpect(method(HttpMethod.POST))
+                .andExpect(jsonPath("$.subscriptionId").value("1"))
+                .andExpect(jsonPath("$.originator").value("http://iotAgent"))
+                .andExpect(jsonPath("$.contextResponses[*]", hasSize(1)))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.id").value("S1"))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.type").value("TempSensor"))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.isPattern").value("false"))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.attributes[*]", hasSize(1)))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.attributes[0].name").value("temp"))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.attributes[0].type").value("float"))
+                .andExpect(jsonPath("$.contextResponses[0].contextElement.attributes[0].value").value("15.5"))
+                .andRespond(withSuccess(responseBody, MediaType.APPLICATION_JSON));
+
+        NotifyContextResponse response = ngsiClient.notifyContextCustomURL(baseUrl+"/test?p1=v1", null, createNotifyContextTempSensor(0)).get();
+        this.mockServer.verify();
+
+        Assert.assertEquals(CodeEnum.CODE_200.getLabel(), response.getResponseCode().getCode());
+    }
+
+    @Test
+    public void notifyContextRequestCustomURLOK_XML() throws Exception {
+
+        ngsiClient.protocolRegistry.registerHost(baseUrl);
+
+        String responseBody = xml(xmlConverter, createNotifyContextResponseTempSensor());
+
+        this.mockServer.expect(requestTo(baseUrl+"/test?p1=v1"))
+                .andExpect(method(HttpMethod.POST))
+                .andExpect(header("Content-Type", MediaType.APPLICATION_XML_VALUE))
+                .andExpect(header("Accept", MediaType.APPLICATION_XML_VALUE))
+                .andExpect(xpath("notifyContextRequest/subscriptionId").string("1"))
+                .andExpect(xpath("notifyContextRequest/originator").string("http://iotAgent"))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse[*]").nodeCount(1))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/entityId/id").string("S1"))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/entityId/@type").string("TempSensor"))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/entityId/@isPattern").string("false"))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/contextAttributeList/contextAttribute[*]").nodeCount(1))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/contextAttributeList/contextAttribute/name").string("temp"))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/contextAttributeList/contextAttribute/type").string("float"))
+                .andExpect(xpath("notifyContextRequest/contextResponseList/contextElementResponse/contextElement/contextAttributeList/contextAttribute/contextValue").string("15.5"))
+                .andRespond(withSuccess(responseBody, MediaType.APPLICATION_XML));
+
+        NotifyContextResponse response = ngsiClient.notifyContextCustomURL(baseUrl+"/test?p1=v1", null, createNotifyContextTempSensor(0)).get();
+        this.mockServer.verify();
+
+        Assert.assertEquals(CodeEnum.CODE_200.getLabel(), response.getResponseCode().getCode());
+    }
 }

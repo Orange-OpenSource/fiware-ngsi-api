@@ -113,6 +113,17 @@ public class NgsiClient {
     }
 
     /**
+     * Send an notify request to a custom URL
+     * @param customURL the URL to notify
+     * @param httpHeaders the HTTP header to use, or null for default
+     * @param notifyContext the notifyContext
+     * @return a future for a NotifyContextResponse
+     */
+    public ListenableFuture<NotifyContextResponse> notifyContextCustomURL(String customURL, HttpHeaders httpHeaders, NotifyContext notifyContext) {
+        return request(customURL, httpHeaders, notifyContext, NotifyContextResponse.class);
+    }
+
+    /**
      * Send an query request
      * @param url the URL of the registration provider
      * @param httpHeaders the HTTP header to use, or null for default
