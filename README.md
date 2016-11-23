@@ -86,7 +86,7 @@ Example: to send an asynchronous updateContext
 ```java
     ngsiClient.updateContext(brokerUrl, httpHeaders, update)
               .addCallback(updateContextResponse -> logUpdateContextResponse(updateContextResponse, brokerUrl),
-                       throwable -> logger.warn("UpdateContext failed for {}: {}", brokerUrl, throwable.toString()));
+                       throwable -> logger.warn("UpdateContext failed for {}", brokerUrl, throwable));
 ```
 
 ## Server
