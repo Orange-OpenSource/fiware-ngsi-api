@@ -1,3 +1,7 @@
+# 0.1.3
+
+* FIX: Fix maven release (released pom contained a snapshot dependecy)
+
 # 0.1.2
 
 * Add a new notifyContextCustomURL request to send notifyContext request to custom URLs.
